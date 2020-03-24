@@ -1,0 +1,41 @@
+<div class="container mt-5">
+    <div class="row">
+       <div class="col-12">
+          <div class=" btn-danger mt-2 justify-content-center d-flex" *ngIf="!isCSV()">Please Add a Valid CSV File</div>
+          <div class=" btn-danger mt-2 justify-content-center d-flex" *ngIf="showErrorMessage">{{errorMsg}}</div>
+       </div>
+    </div>
+ <div class="row pt-3 bg-white">
+    <div class="col-6">
+      <span class="mr-2 ">Add File</span>
+      <div class="row">
+        <div class="col-12 col-md-6 mt-1">
+          <input type="file" accept=".csv" #csvReader name="csvFileUpload" id="csvFileUpload" (change)="changeListener($event)" >
+        </div>
+        <div class="col-12 col-md-6 mt-1">
+          
+        </div>
+      </div>
+  
+    </div>
+    <div class="col-12 col-md-6">
+      <span class="mr-2">Sort By</span>
+      <div class="row mt-1">
+        <div class="col-6">
+          <select name="filter" id="filter" class="form-control" [formControl]="sortBy">
+            <option value="issueCount"> Issue Count</option>
+            <option value="firstName">First Name</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-6">
+          <input type="radio" name="sort" id="asc" class="mr-1" value="asc" [formControl]="sortOrder"> <label
+            for="asc">Ascending</label>
+          <input type="radio" name="sort" id="dsc" class="ml-2 mr-1" [formControl]="sortOrder" value="dsc"> <label
+            for="dsc">Descending</label>
+        </div>
+      </div>
+    </div>
+ </div>
+ <app-csv-visualizer [records]="userRecords"></app-csv-visualizer>
+ </div>
+ 
