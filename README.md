@@ -4,7 +4,7 @@ This application displays the contents of a CSV file in web browser and allows t
 ## Getting Started
 Clone or Download the source code from
 ```bash
-* https://github.com/dareljones/RaboAssignmentFrontend
+* https://github.com/ANGAD-KUMAR-VERMA/Rabo-Assignment-FrontEnd
 ```
 ### Prerequisites
 Things required to work properly
@@ -30,5 +30,5 @@ To run the project
 	- Click upload file to choose a CSV file
 		-sample in "src/assets/"
 ## Output
-The contents of the CSV file will be displayed as a table.
-From the select box choose Issue count and then you can tick the ascending or descending button based upon requirement.
+.The contents of the CSV file will be displayed as a table.
+.From the select box choose Issue count and then you can tick the ascending or descending button based upon requirement.
