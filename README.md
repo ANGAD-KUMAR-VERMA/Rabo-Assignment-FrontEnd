@@ -30,5 +30,5 @@ To run the project
 	- Click upload file to choose a CSV file
 		-sample in "src/assets/"
 ## Output
-*The contents of the CSV file will be displayed as a table.
-*From the select box choose Issue count and then you can tick the ascending or descending button based upon requirement.
+* The contents of the CSV file will be displayed as a table.
+* From the select box choose Issue count and then you can tick the ascending or descending button based upon requirement.
