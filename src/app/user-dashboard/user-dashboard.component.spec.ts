@@ -7,11 +7,12 @@ import { UserDetails } from '../model/user-details.model';
 import { inject } from '@angular/core/testing';
 import { MAT_SORT_HEADER_INTL_PROVIDER } from '@angular/material/sort';
 import { By } from '@angular/platform-browser';
+import { ConstantService } from '../service/constant.service';
 
 describe('UserDashboardComponent', () => {
   let component: UserDashboardComponent;
   let fixture: ComponentFixture<UserDashboardComponent>;
-
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ UserDashboardComponent ],
@@ -20,7 +21,25 @@ describe('UserDashboardComponent', () => {
         provide:CSVParserService,
         useValue:{
           isValidCSV :true,
+          showErrorMessage:true,
+          getDataRecordsArrayFromCSVFile:()=>{
+
+             let headerArray=["First name","Sur name","Issue Count","Date Of Birth"]; 
+            return headerArray;
+          },
+          getHeaderArray:()=>{
+            let headerArray:string[]=["First name","LastName","Issue Count","Date Of Birth"];
+          },
+          isValidCSVFile:()=>{
+
+          }
         }
+       },
+       {
+         provide:ConstantService,
+         useValue:{
+           noOfRows:4,
+         }
        }
       ]
     })
@@ -31,6 +50,7 @@ describe('UserDashboardComponent', () => {
     fixture = TestBed.createComponent(UserDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    
   });
 
   it('should create', () => {
@@ -113,17 +133,36 @@ it('when fileReset() method is invoked it should reset the values to empty',()=>
   expect(component.userRecords).toEqual([]);
 })
 
-it('changeListener()',()=>{
-  // const mockFile = new File([''], 'filename', { type: 'csv' });
-  // const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsText', 'onload']);
-  
-  // component.changeListener(mockFile);
-  let input  = fixture.debugElement.query(By.css('input[type=file]')).nativeElement;
-  input.value = {name: 'csv'};
-  spyOn(component, 'changeListener');
-input.dispatchEvent(new Event('change'));
-expect(component.changeListener).toHaveBeenCalled();
+// it('changeListener()',()=>{
+//  // const mockFile = new File([''], 'filename', { type: 'csv' });
+//   const mockReader: FileReader = jasmine.createSpyObj('FileReader', ['readAsText', 'onload']);
+//   //const data: any = require('../../assets/issues.csv');
+//   component.readerOnload(mockReader);
+//   expect(component.showErrorMessage).toBeTruthy();
+// //   let input  = fixture.debugElement.query(By.css('input[type=file]')).nativeElement;
+// //   input.value = {name: 'csv'};
+// //   spyOn(component, 'changeListener');
+// // input.dispatchEvent(new Event('change'));
+// // expect(component.changeListener).toHaveBeenCalled();
 
-})
+// // component.changeListener(new Event('change'));
+
+// })
+
+it('when validateCsvFile() is invoked it should call initializesort method ',inject([CSVParserService],(csvParserService:CSVParserService)=>{
+
+
+       spyOn(component,"fileReset")
+       let csvData:string="";
+        //  let headerLength=4;
+        // csvParserService.getDataRecordsArrayFromCSVFile(csvData,headerLength);
+       component.validateCsvFile(csvData);
+       
+       expect(component.fileReset).toHaveBeenCalled();
+       
+      
+}))
+
+
 
 });

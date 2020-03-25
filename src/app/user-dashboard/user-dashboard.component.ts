@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDetails } from '../model/user-details.model';
 import { FormControl } from '@angular/forms';
 import { CSVParserService } from '../service/csv-parser.service';
+import { ConstantService } from '../service/constant.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -18,15 +19,17 @@ export class UserDashboardComponent implements OnInit {
   sortOrder: FormControl = new FormControl('');
   sortBy: FormControl = new FormControl('issueCount');
 
-  constructor(private csvParserService:CSVParserService ){
+  constructor(private csvParserService:CSVParserService ,private constantservice:ConstantService){
   } 
 
   errorMsg:string;
   showErrorMessage:boolean;
+  headerLength:number;
   
   ngOnInit(){
     this.errorMsg=this.csvParserService.errorMsg;
     this.showErrorMessage=this.csvParserService.showErrorMsg;
+    this.headerLength=this.constantservice.noOfRows;
   }
   
   changeListener($event:any):void{
@@ -44,31 +47,9 @@ export class UserDashboardComponent implements OnInit {
   
       reader.onload = () => {  
         let csvData = reader.result;  
-        let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);  
-        if(csvRecordsArray.length <= 1){
-          this.errorMsg="Added CSV File is Empty";
-          this.showErrorMessage=true; 
-          setTimeout(()=>{
-            this.showErrorMessage=false;
-          },3000);
-          return;
-        }
-  
-        let headersRow = this.csvParserService.getHeaderArray(csvRecordsArray); 
-        if(!this.csvParserService.isValidCSVFile(headersRow))
-        {
-          this.fileReset();
-          this.errorMsg=this.csvParserService.errorMsg;
-          this.showErrorMessage=this.csvParserService.showErrorMsg;
-          setTimeout(()=>{
-            this.showErrorMessage=false;
-          },3000);
-          return;
-        }
-        this.userRecords = this.csvParserService.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length); 
+        //let csvRecordsArray = (<string>csvData).split(/\r\n|\n/); 
+        this.validateCsvFile(csvData); 
       
-        this.initializeSort(); 
-        this.ngOnInit();
       }; 
   }
   else {  
@@ -76,6 +57,37 @@ export class UserDashboardComponent implements OnInit {
     this.fileReset();  
   }  
 }  
+
+validateCsvFile(csvData:any){
+  let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
+  if(csvRecordsArray.length <= 1){
+    this.errorMsg="Added CSV File is Empty";
+    this.showErrorMessage=true; 
+    setTimeout(()=>{
+      this.showErrorMessage=false;
+    },3000);
+   //return;
+  }
+  
+  let headersRow = this.csvParserService.getHeaderArray(csvRecordsArray); 
+  if(!this.csvParserService.isValidCSVFile(headersRow))
+  {
+    this.fileReset();
+    this.errorMsg=this.csvParserService.errorMsg;
+    this.showErrorMessage=this.csvParserService.showErrorMsg;
+    setTimeout(()=>{
+      this.showErrorMessage=false;
+    },3000);
+    //return;
+  }
+
+  this.userRecords = this.csvParserService.getDataRecordsArrayFromCSVFile(csvRecordsArray, this.headerLength); 
+      
+        this.initializeSort(); 
+        this.ngOnInit();
+
+
+}
 
 
 fileReset() {  
