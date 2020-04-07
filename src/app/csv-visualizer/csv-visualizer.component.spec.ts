@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CsvVisualizerComponent } from './csv-visualizer.component';
+
 
 describe('CsvVisualizerComponent', () => {
   let component: CsvVisualizerComponent;
@@ -8,9 +8,9 @@ describe('CsvVisualizerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CsvVisualizerComponent ]
+      declarations: [CsvVisualizerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

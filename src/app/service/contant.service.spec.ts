@@ -1,40 +1,29 @@
-import { TestBed, inject } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from '@angular/common/http/testing';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import { ConstantService } from './constant.service';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+
 
 
 describe('CSVParserService', () => {
-    let service: ConstantService;
-    let httpMock: HttpTestingController;
-    let subject= new Subject();
-  
-    
-    beforeEach(() => TestBed.configureTestingModule({}));
-  
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule,HttpClientModule],
-        providers: [HttpClient,ConstantService]
-      });
-  
-      service = TestBed.get(ConstantService);
-      httpMock = TestBed.get(HttpTestingController);
-    });
-  
-    it('should be created', () => {
-      const service: ConstantService = TestBed.get(ConstantService);
-      expect(service).toBeTruthy();
+  let service: ConstantService;
+  let httpMock: HttpTestingController;
+
+
+  beforeEach(() => TestBed.configureTestingModule({}));
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, HttpClientModule],
+      providers: [HttpClient, ConstantService]
     });
 
-    // it('when isCSVFile method is invoked it should return true if the filename is ending with .csv',()=>{
-    //     let file="issues.csv";
-    //     service.isCSVFile(file);
-    //     expect().toBeTruthy();
-    // })
+    service = TestBed.get(ConstantService);
+    httpMock = TestBed.get(HttpTestingController);
+  });
+
+  it('should be created', () => {
+    const service: ConstantService = TestBed.get(ConstantService);
+    expect(service).toBeTruthy();
+  });
 });

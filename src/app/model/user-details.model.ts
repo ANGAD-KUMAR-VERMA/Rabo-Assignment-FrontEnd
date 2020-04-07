@@ -1,7 +1,7 @@
-export class UserDetails{
+export class UserDetails {
 
-    firstName : string ;
-    surName : string ;
-    issueCount : number ;
-    dateOfBirth : string ;
+    firstName: string;
+    surName: string;
+    issueCount: number;
+    dateOfBirth: string;
 }

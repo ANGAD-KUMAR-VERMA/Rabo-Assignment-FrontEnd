@@ -1,20 +1,18 @@
-<table class="table table-bordered  mt-5" *ngIf="records.length > 0">    
-    <thead>    
-      <tr>    
-        <th>FirstName </th>    
-        <th>SurName </th>    
-        <th>Issue Count </th>    
-        <th>Date Of Birth </th>    
-      </tr>    
-    </thead>    
-    <tbody>    
-      <tr *ngFor="let record of records;let i = index;">    
-        <td class="firstname"> <span>{{record.firstName}}</span> </td>    
-        <td> <span>{{record.surName}}</span> </td>    
-        <td> <span>{{record.issueCount}}</span> </td>    
-        <td> <span>{{record.dateOfBirth}}</span> </td>    
-      </tr>    
-    </tbody>    
-  </table>  
-
- 
+<table class="table table-bordered  mt-5" *ngIf="records.length > 0">
+  <thead>
+    <tr>
+      <th>FirstName </th>
+      <th>SurName </th>
+      <th>Issue Count </th>
+      <th>Date Of Birth </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let record of records;let i = index;">
+      <td class="firstname"> <span>{{record.firstName}}</span> </td>
+      <td> <span>{{record.surName}}</span> </td>
+      <td> <span>{{record.issueCount}}</span> </td>
+      <td> <span>{{record.dateOfBirth}}</span> </td>
+    </tr>
+  </tbody>
+</table>  

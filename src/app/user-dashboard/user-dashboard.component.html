@@ -1,25 +1,26 @@
 <div class="container mt-5">
-    <div class="row">
-       <div class="col-12">
-          <div class=" btn-danger mt-2 justify-content-center d-flex" *ngIf="!isCSV()">Please Add a Valid CSV File</div>
-          <div class=" btn-danger mt-2 justify-content-center d-flex" *ngIf="showErrorMessage">{{errorMsg}}</div>
-       </div>
+  <div class="row">
+    <div class="col-12">
+      <div class=" btn-danger mt-2 justify-content-center d-flex" *ngIf="!validCsvFile">Please Add a Valid CSV File
+      </div>
+      <div class=" btn-danger mt-2 justify-content-center d-flex" *ngIf="showErrorMessage">{{errorMsg}}</div>
     </div>
- <div class="row pt-3 bg-white">
+  </div>
+  <div class="row pt-3 bg-white">
     <div class="col-6">
       <span class="mr-2 ">Add File</span>
       <div class="row">
         <div class="col-12 col-md-6 mt-1">
-          <input type="file" accept=".csv" #csvReader name="csvFileUpload" id="csvFileUpload" (change)="changeListener($event)" >
+          <input type="file" accept=".csv" #csvReader name="csvFileUpload" id="csvFileUpload"
+            (change)="changeListener($event)">
         </div>
-        <div class="col-12 col-md-6 mt-1">
-          
+        <div class="col-12 col-md-6 mt-1">  
         </div>
       </div>
-  
+
     </div>
     <div class="col-12 col-md-6">
-      <span class="mr-2">Sort By</span>
+      <span class="mr-2">Sort By</span>  
       <div class="row mt-1">
         <div class="col-6">
           <select name="filter" id="filter" class="form-control" [formControl]="sortBy">
@@ -35,7 +36,6 @@
         </div>
       </div>
     </div>
- </div>
- <app-csv-visualizer [records]="userRecords"></app-csv-visualizer>
- </div>
- 
+  </div>
+  <app-csv-visualizer [records]="userRecords"></app-csv-visualizer>
+</div>
